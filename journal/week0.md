@@ -2,6 +2,8 @@
 ## Watched all the videos:
 Chirag's spending considerations, ashish's security considerations
 ## Made both the Conceptual Diagram and Architectural Diagram
+Conceptual Diagram
+![Conceptual Diagram](assets/conceptual-diagram.png)
 Architectural Diagram
 ![Architectural Diagram](assets/cruddur-logical-diagram.png)
 
