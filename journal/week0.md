@@ -2,7 +2,7 @@
 ## Watched all the videos:
 Chirag's spending considerations, ashish's security considerations
 ## Made both the Conceptual Diagram and Architectural Diagram
->ToDo: find way to put the diagram here
+![Architectural Diagram](assets/cruddur-logical-diagram.png)
 
 ## Setup the billing alarms and budgets
 It is set to send the notification to the email.
