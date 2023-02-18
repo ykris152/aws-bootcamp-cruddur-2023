@@ -17,6 +17,8 @@ Budgets
 ## Account related stuff and CLI setup
 made a new IAM user for this project (name is awscloudaccount)
 Generated the AWS Credentials and applied it to gitpod and my university pc(that i only use)
-
 gitpod setup
 ![Billing Alarm](assets/gitpod-cloud-account.png)
+University PC setup
+![University PC](assets/university-pc-setup.png)
+
