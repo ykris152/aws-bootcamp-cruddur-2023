@@ -9,8 +9,12 @@ Architectural Diagram
 It is set to send the notification to the email.
 Billing Alarm
 ![Billing Alarm](assets/billing-alarm-email.png)
+Budgets
+![Budgets](assets/aws-budgets.png)
 
 ## Account related stuff and CLI setup
 made a new IAM user for this project (name is awscloudaccount)
 Generated the AWS Credentials and applied it to gitpod and my university pc(that i only use)
->ToDo: find way to put the screenshot
+
+gitpod setup
+![Billing Alarm](assets/gitpod-cloud-account.png)
