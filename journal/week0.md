@@ -4,7 +4,7 @@ Chirag's spending considerations, ashish's security considerations
 
 ## Made both the Conceptual Diagram and Architectural Diagram
 Conceptual Diagram<br />
-![Conceptual Diagram](assets/conceptual-diagram.png)<br />
+![Conceptual Diagram](assets/conceptual-diagram.jpg)<br />
 
 Architectural Diagram<br />
 ![Architectural Diagram](assets/cruddur-logical-diagram.png)<br />
