@@ -55,3 +55,15 @@ networks:
 So my I am troubleshooting it right now.
 As a reference i read the article about docker networking introduced. Which really helped me. But i am not still be able to solve the problem. I'll try to work it out this weekend. then maybe i'll try the QA discord
 (https://pythonspeed.com/articles/docker-connection-refused/)
+
+Updated:
+docker compose up works on local environment now.
+The fix is in the docker-compose.yml file
+```yml
+FRONTEND_URL: "http://localhost:3000/"
+BACKEND_URL: "http://localhost:4567/"
+REACT_APP_BACKEND_URL: "http://localhost:4567/"
+```
+This enables the communication between backend and frontend.
+
+The fix for the frontend is just to wait it. because it takes a long time to startup :)
