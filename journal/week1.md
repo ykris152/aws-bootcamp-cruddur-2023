@@ -22,7 +22,7 @@ But somehow, they don't seem to be able to communicate with each other.
 The Posts on the home page is not shown at all.
 Furthermore, when i used docker compose up to launch the containers together. The frontend doesn't work.
 
-'''
+'''yaml
 version: "3.8"
 services:
   backend-flask:
