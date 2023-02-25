@@ -67,3 +67,4 @@ REACT_APP_BACKEND_URL: "http://localhost:4567/"
 This enables the communication between backend and frontend.
 
 The fix for the frontend is just to wait it. because it takes a long time to startup :)
+![docker compose Working in local environment!](assets/containers_running_with_docker_compose_week2.png)<br />
