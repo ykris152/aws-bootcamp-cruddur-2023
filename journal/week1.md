@@ -22,7 +22,8 @@ But somehow, they don't seem to be able to communicate with each other.
 The Posts on the home page is not shown at all.
 Furthermore, when i used docker compose up to launch the containers together. The frontend doesn't work.
 
-'''yaml
+This is my docker-compose.yml file.
+```yaml
 version: "3.8"
 services:
   backend-flask:
@@ -49,8 +50,7 @@ networks:
   internal-network:
     driver: bridge
     name: cruddur
-'''
-This is my docker-compose.yml file.
+```
 
 So my I am troubleshooting it right now.
 As a reference i read the article about docker networking introduced. Which really helped me. But i am not still be able to solve the problem. I'll try to work it out this weekend. then maybe i'll try the QA discord
