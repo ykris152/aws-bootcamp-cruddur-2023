@@ -24,8 +24,8 @@ from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from opentelemetry.sdk.trace.export import ConsoleSpanExporter, SimpleSpanProcessor
 
 # # X-ray ----
-from aws_xray_sdk.core import xray_recorder
-from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
+# from aws_xray_sdk.core import xray_recorder
+# from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
 
 # # Cloudwatch Logs ----
 # import watchtower
@@ -53,8 +53,8 @@ processor = BatchSpanProcessor(OTLPSpanExporter())
 provider.add_span_processor(processor)
 
 # X-ray ----
-xray_url = os.getenv("AWS_XRAY_URL")
-xray_recorder.configure(service='backend-flask', dynamic_naming=xray_url)
+# xray_url = os.getenv("AWS_XRAY_URL")
+# xray_recorder.configure(service='backend-flask', dynamic_naming=xray_url)
 
 # OTEL ----
 # Show this in the logs within the backend-app flask (STDOUT)
@@ -67,7 +67,7 @@ tracer = trace.get_tracer(__name__)
 app = Flask(__name__)
 
 # X-ray ----
-XRayMiddleware(app, xray_recorder)
+# XRayMiddleware(app, xray_recorder)
 
 # Rollbar ----
 rollbar_access_token = os.getenv('ROLLBAR_ACCESS_TOKEN')
@@ -162,7 +162,7 @@ def data_notifications():
   return data, 200
 
 @app.route("/api/activities/@<string:handle>", methods=['GET'])
-@xray_recorder.capture('user-activities-show')
+# @xray_recorder.capture('user-activities-show')
 def data_handle(handle):
   model = UserActivities.run(handle)
   if model['errors'] is not None:
