@@ -17,4 +17,7 @@ and tested the traces too.
 ![Rollbar](assets/rollbar-week2.png)<br />
 
 # Homework Challenge
-Making the cloud role homework (work in progress)
+## My Journey to the Cloud!
+I read all the 5 job descriptions, and i am interested in Solutions Architect - Traditional, DevOps Engineer
+Here is my Journey to the cloud..
+![Journey to the cloud](assets/Journey-to-the-cloud-week2.png)<br />
