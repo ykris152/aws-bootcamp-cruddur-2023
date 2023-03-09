@@ -70,7 +70,7 @@ app = Flask(__name__)
 
 cognito_jwt_token = CognitoJwtToken(
   user_pool_id = os.getenv('AWS_COGNITO_USER_POOL_ID'),
-  user_pool_client_id = os.getenv('AWS_COGNITO_USER_POOL_ID'),
+  user_pool_client_id = os.getenv('AWS_COGNITO_USER_POOL_CLIENT_ID'),
   region = os.getenv('AWS_DEFAULT_REGION')
 )
 # X-ray ----
@@ -165,8 +165,8 @@ def data_home():
     claims = cognito_jwt_token.verify(access_token)
     # authenicatied request
     app.logger.debug("authenicated")
-    app.logger.debug(claims)
-    app.logger.debug(claims['username'])
+    # app.logger.debug(claims)
+    # app.logger.debug(claims['username'])
     data = HomeActivities.run(cognito_user_id=claims['username'])
   except TokenVerifyError as e:
     # unauthenicatied request
