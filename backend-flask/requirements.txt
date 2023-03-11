@@ -14,4 +14,4 @@ watchtower
 blinker
 rollbar
 
-jose
+python-jose
