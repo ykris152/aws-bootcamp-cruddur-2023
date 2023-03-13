@@ -15,3 +15,16 @@ User Pool<br />
 
 # Problem i met during, implementing on my repository.
 When trying to implement login and sign in on my repository.
+I met an error with message "Token was not issued for this audience"
+![Token Error](assets/token-was-not-issued-week3.png)<br />
+Then i after digging around a bit, i found the problem on my app.py.
+
+Wrong
+```py
+user_pool_client_id = os.getenv('AWS_COGNITO_USER_POOL_ID')
+```
+
+Correct
+```py
+user_pool_client_id = os.getenv('AWS_COGNITO_USER_POOL_CLIENT_ID')
+```
