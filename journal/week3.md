@@ -6,7 +6,7 @@ Watched all the videos except Spending Consideration.
 User Pool<br />
 ![User Pool](assets/cognito-user-pool-week3.png)<br />
 
-## Changed the UI color and implemented Custom Sign In Page, Sign Up, Signed In, Recovery, Confirmation Page
+## Changed the UI color and implemented Custom Sign In, Sign Up, Signed In, Recovery, Confirmation Page
 ![Sign In](assets/sign-in-week3.png)<br />
 ![Sign Up](assets/sign-up-week3.png)<br />
 ![Signed In](assets/signed-in-week3.png)<br />
