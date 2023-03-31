@@ -1,0 +1,11 @@
+INSERT INTO (
+    user_uuid
+)
+VALUES (
+    (SELECT uuid 
+    FROM public.users 
+    WHERE users.handle = %(handle)s
+    LIMIT 1
+    %(message)s,
+    %(expires_at)s
+    ) RETURNING uuid;

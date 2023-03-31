@@ -1,23 +1,43 @@
 from psycopg_pool import ConnectionPool
 import os
+import sys
+import re
 
 class Db:
   def __init__(self):
     self.init_pool()
 
+  def template(name):
+    template_path = os.path.join(app.instance_path,'db','sql',name + 'sql')
+    with open(template_path, 'r') as f:
+      template_content = f.read()
+    return template_content
+    
   def init_pool(self):
     connection_url = os.getenv("CONNECTION_URL")
     self.pool = ConnectionPool(connection_url)
 
-  # commit data
-  def query_commit(self,sql):
+  def query_commit(self,sql,params):
+    print("SQL Statement [commit] with returning id")
+
+    pattern = r"\bRETURNING\b"
+    is_returning_id = re.search(pattern, sql)
+
     try:
       conn = self.pool.connection()
       cur = conn.cursor()
-      cur.execute(sql)
+      cur.execute(sql,params)
+      
+      if is_returning_id:
+        returning_id = cur.fetchone()[0]
+
       conn.commit()
+
+      if is_returning_id:
+        return returning_id  
+
     except Exception as err:
-      print_sql_err(err)
+      self.print_sql_err(err)
       # conn.rollback()
 
   #return a json array
@@ -62,7 +82,7 @@ class Db:
     print ("psycopg traceback:", traceback, "-- type:", err_type)
 
     # psycopg2 extensions.Diagnostics object attribute
-    print ("\nextensions.Diagnostics:", err.diag)
+    # print ("\nextensions.Diagnostics:", err.diag)
 
     # print the pgcode and pgerror exceptions
     print ("pgerror:", err.pgerror)
