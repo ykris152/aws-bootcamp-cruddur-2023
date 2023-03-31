@@ -2,13 +2,14 @@ from psycopg_pool import ConnectionPool
 import os
 import sys
 import re
+from flask import current_app as app
 
 class Db:
   def __init__(self):
     self.init_pool()
 
-  def template(name):
-    template_path = os.path.join(app.instance_path,'db','sql',name + 'sql')
+  def template(self,name):
+    template_path = os.path.join(app.root_path,'db','sql',name + '.sql')
     with open(template_path, 'r') as f:
       template_content = f.read()
     return template_content
