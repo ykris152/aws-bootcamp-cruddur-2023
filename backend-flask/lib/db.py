@@ -113,8 +113,8 @@ class Db:
     # print ("\nextensions.Diagnostics:", err.diag)
 
     # print the pgcode and pgerror exceptions
-    # print ("pgerror:", err.pgerror)
-    # print ("pgcode:", err.pgcode, "\n")
+    print ("pgerror:", err.pgerror)
+    print ("pgcode:", err.pgcode, "\n")
 
   def query_wrap_object(self,template):
     sql = f"""
