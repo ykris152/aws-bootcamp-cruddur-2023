@@ -39,7 +39,12 @@ user_handle = {user}
 ```
 
 Then i also changed the ActivityForm.js component to also include the user_handle variable
+```
+user_handle: props.user_handle.handle,
+```
 
+
+Finally change the user_handle variable in data_activities inside app.py
 ```
 user_handle = request.json["user_handle"]
 ```
