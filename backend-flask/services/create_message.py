@@ -30,7 +30,7 @@ class CreateMessage:
       # return what we provided
       model['data'] = {
         'display_name': 'ykris152',
-        'handle': 'ykris152',
+        'handle': user_sender_handle,
         'message': message
       }
     else:
