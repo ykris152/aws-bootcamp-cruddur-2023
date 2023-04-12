@@ -5,13 +5,21 @@ from boto3.dynamodb.conditions import Key, Attr
 dynamodb = boto3.resource(
  'dynamodb',
  region_name='ap-northeast-1',
- endpoint_url="http://dynamodb.ca-central-1.amazonaws.com"
+ endpoint_url="http://dynamodb.ap-northeast-1.amazonaws.com"
 )
 
 def lambda_handler(event, context):
   print('event data : ', event)
+  
+  eventName = event['Records'][0]['eventName']
+  if (eventName == 'REMOVE'):
+    print("skip REMOVE event")
+    return
+  
   pk = event['Records'][0]['dynamodb']['Keys']['pk']['S']
   sk = event['Records'][0]['dynamodb']['Keys']['sk']['S']
+  print('pk data : ', pk)
+  print('pk data : 2', pk)
   if pk.startswith('MSG#'):
     group_uuid = pk.replace("MSG#","")
     message = event['Records'][0]['dynamodb']['NewImage']['message']['S']
