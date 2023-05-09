@@ -14,5 +14,5 @@ echo $BIN_PATH
 source "$BIN_PATH/drop"
 source "$BIN_PATH/create"
 source "$BIN_PATH/schema-load"
-source "$BIN_PATH/seed"
+source "$BIN_PATH/db/seed"
 python "$BIN_PATH/db/update_cognito_user_ids"
