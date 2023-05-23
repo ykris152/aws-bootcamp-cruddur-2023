@@ -60,14 +60,14 @@ Turn on Container insights
 
 ### Change Docker Compose to use user-defined network
 include the following network settings in all container
-'''
+'''yaml
 networks:
       - cruddur-net
 '''
 
 change network configuration in the bottom
 
-'''
+'''yaml
 networks: 
   cruddur-net:
     driver: bridge
@@ -75,7 +75,8 @@ networks:
 '''
 ### Create Dockerfile for production use case
 create a new Dockerfile.prod in backend-flask directory
-'''
+
+'''dockerfile
 # FROM python:3.10-slim-buster
 FROM 938858911474.dkr.ecr.ap-northeast-1.amazonaws.com/cruddur-python:3.10-slim-buster
 
@@ -95,7 +96,7 @@ CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567", "--no-d
 '''
 
 create a new Dockerfile.prod in frontend-react-js directory
-'''
+'''dockerfile
 # Base Image ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 FROM node:16.18 AS build
 
@@ -131,7 +132,7 @@ Ruby scripts (backend - frontend) <br />
 ![Ruby scripts](assets/ruby-script-to-generate-env-files-week67.png)<br />
 
 erb template for backend
-'''
+'''erb
 AWS_ENDPOINT_URL=http://dynamodb-local:8000
 CONNECTION_URL=postgresql://postgres:password@db:5432/cruddur
 FRONTEND_URL=https://3000-<%= ENV['GITPOD_WORKSPACE_ID'] %>.<%= ENV['GITPOD_WORKSPACE_CLUSTER_HOST'] %>
@@ -150,7 +151,7 @@ AWS_COGNITO_USER_POOL_CLIENT_ID=63oijlpq4ufk9rtb6kt5a6b1lg
 '''
 
 erb template for frontend
-'''
+'''erb
 REACT_APP_BACKEND_URL=https://4567-<%= ENV['GITPOD_WORKSPACE_ID'] %>.<%= ENV['GITPOD_WORKSPACE_CLUSTER_HOST'] %>
 REACT_APP_AWS_PROJECT_REGION=<%= ENV['AWS_DEFAULT_REGION'] %>
 REACT_APP_AWS_COGNITO_REGION=<%= ENV['AWS_DEFAULT_REGION'] %>
