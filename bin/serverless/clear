@@ -1,0 +1,4 @@
+#! /usr/bin/bash
+
+aws s3 rm "s3://assets.thebanana.click/avatars/original/20230121_190025.jpg"
+aws s3 rm "s3://assets.thebanana.click/avatars/processed/20230121_190025.png"
