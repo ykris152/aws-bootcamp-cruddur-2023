@@ -3,4 +3,4 @@ ABS_PATH=$(readlink -f "$0")
 SERVERLESS_PATH=$(dirname $ABS_PATH)
 UPLOAD_FILE_PATH="$SERVERLESS_PATH/files/20230121_190025.jpg"
 
-aws s3 cp "$UPLOAD_FILE_PATH" "s3://assets.thebanana.click/avatars/original"
+aws s3 cp "$UPLOAD_FILE_PATH" "s3://assets.$DOMAIN_NAME/avatars/original/20230121_190025.jpg"
