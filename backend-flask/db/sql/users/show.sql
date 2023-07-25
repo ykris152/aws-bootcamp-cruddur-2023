@@ -1,7 +1,10 @@
 SELECT
-    user.uuid,
-    user.handle,
-    user.display_name,
+    (SELECT COALESCE(row_to_json(object_row),'{}'::json) FROM (
+        SELECT
+            users.uuid,
+            users.handle,
+            users.display_name
+    ) object_row) as profile,
     (SELECT COALESCE(array_to_json(array_agg(row_to_json(array_row))),'[]'::json) FROM (
         SELECT 
             activities.uuid,
@@ -12,10 +15,10 @@ SELECT
             activities.expires_at
         FROM public.activities
         WHERE
-            activities.user_uuid = user.uuid
+            activities.user_uuid = users.uuid
         ORDER BY activities.created_at DESC
         LIMIT 20
     ) array_row) as activities
 FROM public.users
 WHERE
-    users.id = %(handle)s
+    users.handle = %(handle)s
