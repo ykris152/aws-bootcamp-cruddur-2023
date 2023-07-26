@@ -10,7 +10,7 @@ tasks:
       cd $THEIA_WORKSPACE_ROOT
   - name: flask
     command: |
-      "$THEIA_WORKSPACE_ROOT/bin/backend/gen-env"
+      # "$THEIA_WORKSPACE_ROOT/bin/backend/gen-env"
       cd backend-flask
       pip install -r requirements.txt
   - name: fargate
@@ -22,7 +22,7 @@ tasks:
       cd backend-flask
   - name: react-js
     init: |
-      "$THEIA_WORKSPACE_ROOT/bin/frontend/gen-env"
+      # "$THEIA_WORKSPACE_ROOT/bin/frontend/gen-env"
       cd frontend-react-js
       npm i
   - name: postgres
@@ -40,9 +40,9 @@ tasks:
       cd thumbing-serverless-cdk
       cp .env.example .env
       npm i
-  - name: docker
-    before: |
-      "$THEIA_WORKSPACE_ROOT/bin/ecr/login"
+  # - name: docker
+  #   before: |
+  #     "$THEIA_WORKSPACE_ROOT/bin/ecr/login"
 
 vscode:
   extensions:
