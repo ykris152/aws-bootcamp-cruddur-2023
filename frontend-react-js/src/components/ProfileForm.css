@@ -19,7 +19,12 @@ form.profile_form textarea {
   padding: 16px;
 }
 
-form.profile_form .field.display_name {
+.profile_popup .upload {
+  background: grey;
+  color: rgba(255,255,255,0.7)
+}
+
+form.profile_form .field .display_name {
   margin-bottom: 24px;
 }
 
