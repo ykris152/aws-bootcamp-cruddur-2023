@@ -31,7 +31,6 @@ export default function ProfileForm(props) {
           'Content-Type': 'application/json'
         }
       })
-      let data = await res.json();
       if (res.status === 200) {
         return data.url
       } else {
