@@ -10,7 +10,7 @@ def handler(event:, context:)
     { 
       headers: {
         "Access-Control-Allow-Headers": "*, Authorization",
-        "Access-Control-Allow-Origin": "https://3000-ykris152-awsbootcampcru-j9d0s3ihc6a.ws-us102.gitpod.io",
+        "Access-Control-Allow-Origin": "",
         "Access-Control-Allow-Methods": "OPTIONS,GET,POST"
       },
       statusCode: 200
@@ -24,6 +24,9 @@ def handler(event:, context:)
 
     decoded_token = JWT.decode token, nil, false
     cognito_user_uuid = decoded_token[0]['sub']
+    cognito_user_uuid = event["requestContext"]["authorizer"]["lambda"]["sub"]
+
+    puts({step:'presign url', sub_value: cognito_user_uuid}.to_json)
 
     s3 = Aws::S3::Resource.new
     bucket_name = ENV["UPLOADS_BUCKET_NAME"]
@@ -34,11 +37,12 @@ def handler(event:, context:)
     obj = s3.bucket(bucket_name).object(object_key)
     url = obj.presigned_url(:put, expires_in: 60 * 5)
     url # this is the data that will be returned
+    
     body = {url: url}.to_json
     { 
       headers: {
         "Access-Control-Allow-Headers": "*, Authorization",
-        "Access-Control-Allow-Origin": "https://3000-ykris152-awsbootcampcru-j9d0s3ihc6a.ws-us102.gitpod.io",
+        "Access-Control-Allow-Origin": "",
         "Access-Control-Allow-Methods": "OPTIONS,GET,POST"
       },
       statusCode: 200, 
