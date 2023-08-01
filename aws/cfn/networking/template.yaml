@@ -12,6 +12,17 @@ Parameters:
   Az3:
     Type: AWS::EC2::AvailabilityZone::Name
     Default: ap-northeast-1d
+  SubnetCIDRBlocks: 
+    Description: "three CIDR blocks"
+    Type: CommaDelimitedList
+    Default: >
+      10.0.0.0/24,
+      10.0.4.0/24,
+      10.0.8.0/24,
+      10.0.12.0/24,
+      10.0.16.0/24,
+       10.0.20.0/24
+
 Resources:
   VPC:
     Type: AWS::EC2::VPC
@@ -53,7 +64,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.0.0/24
+      CidrBlock: !Select [0, !Ref SubnetCIDRBlocks]
       AvailabilityZone: !Ref Az1
       EnableDns64: false
       MapPublicIpOnLaunch: true #Public Subnet
@@ -64,7 +75,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.4.0/24
+      CidrBlock: !Select [1, !Ref SubnetCIDRBlocks]
       AvailabilityZone: !Ref Az2
       EnableDns64: false
       MapPublicIpOnLaunch: true #Public Subnet
@@ -75,7 +86,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.8.0/24
+      CidrBlock: !Select [2, !Ref SubnetCIDRBlocks]
       AvailabilityZone: !Ref Az3
       EnableDns64: false
       MapPublicIpOnLaunch: true #Public Subnet
@@ -86,7 +97,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.16.0/24
+      CidrBlock: !Select [3, !Ref SubnetCIDRBlocks]
       AvailabilityZone: !Ref Az1
       EnableDns64: false
       MapPublicIpOnLaunch: false #Private Subnet
@@ -97,7 +108,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.20.0/24
+      CidrBlock: !Select [4, !Ref SubnetCIDRBlocks]
       AvailabilityZone: !Ref Az2
       EnableDns64: false
       MapPublicIpOnLaunch: false #Private Subnet
@@ -108,7 +119,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.24.0/24
+      CidrBlock: !Select [5, !Ref SubnetCIDRBlocks]
       AvailabilityZone: !Ref Az3
       EnableDns64: false
       MapPublicIpOnLaunch: false #Private Subnet
