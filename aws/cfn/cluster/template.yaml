@@ -16,6 +16,9 @@ Description: |
   - Frontend Target Group
 
 Parameters:
+  NetworkingStack:
+    Type: String
+    Description: This is our base layer of networking stuff
   CertificateArn:
     Type: String
   FrontendPort:
@@ -89,10 +92,15 @@ Resources:
     Properties:
       Name: !sub "${AWS::StackName} ALB"
       Type: application
+      IpAddressType: ipv4
       Scheme: internet-facing
       SecurityGroups:
         - !Ref ALBSG
-      IpAddressType: ipv4
+      Subnets:
+        Fn::Split:
+          - ","
+          - Fn::ImportValue:
+              !Sub ${NetworkingStack$BootstrapStack}VpcId
       LoadBalancerAttributes:
         - Key: routing.http2.enabled
           Value: true
@@ -183,13 +191,12 @@ Resources:
         HttpCode: 200
       Protocol: HTTP
       ProtocolVersion: HTTP2
-      Tags: 
-        - Tag
       TargetGroupAttributes: 
-        - TargetGroupAttribute
-      Targets: 
-        - TargetDescription
-      VpcId: String
+        - Key: deregistration_delay.timeout_seconds
+          Value: 0
+      VpcId:
+        Fn::ImportValue:
+          !Sub ${NetworkingStack$BootstrapStack}VpcId
 
   BackendTG:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
@@ -209,12 +216,11 @@ Resources:
         HttpCode: 200
       Protocol: HTTP
       ProtocolVersion: HTTP2
-      Tags: 
-        - Tag
       TargetGroupAttributes: 
-        - TargetGroupAttribute
-      Targets: 
-        - TargetDescription
-      VpcId: String
+        - Key: deregistration_delay.timeout_seconds
+          Value: 0
+      VpcId:
+        Fn::ImportValue:
+          !Sub ${NetworkingStack$BootstrapStack}VpcId
 # Outputs:
   
