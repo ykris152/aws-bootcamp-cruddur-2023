@@ -15,7 +15,59 @@ Description: |
   - Backend Target Group
   - Frontend Target Group
 
-# Parameters:
+Parameters:
+  CertificateArn:
+    Type: String
+  FrontendPort:
+    Type: Number
+    Default: 3000
+  FrontendHealthCheckIntervalSeconds:
+    Type: Number
+    Default: 15
+  FrontendHealthCheckPath:
+    Type: String
+    Default: "/"
+  FrontendHealthCheckPort:
+    Type: String
+    Default: 80
+  FrontendHealthCheckProtocol:
+    Type: String
+    Default: HTTP
+  FrontendHealthCheckTimeoutSeconds:
+    Type: Number
+    Default: 5
+  FrontendHealthyThresholdCount:
+    Type: Number
+    Default: 2
+  FrontendUnhealthyThresholdCount:
+    Type: Number
+    Default: 2
+
+  BackendPort:
+    Type: Number
+    Default: 4567
+  BackendHealthCheckIntervalSeconds:
+    Type: Number
+    Default: 15
+  BackendHealthCheckPath:
+    Type: String
+    Default: "/api/health-check"
+  BackendHealthCheckPort:
+    Type: String
+    Default: 80
+  BackendHealthCheckProtocol:
+    Type: String
+    Default: HTTP
+  BackendHealthCheckTimeoutSeconds:
+    Type: Number
+    Default: 5
+  BackendHealthyThresholdCount:
+    Type: Number
+    Default: 2
+  BackendUnhealthyThresholdCount:
+    Type: Number
+    Default: 2
+
 Resources:
   FargateCluster: # LogicalName
     Type: AWS::ECS::Cluster
@@ -113,35 +165,56 @@ Resources:
           CidrIp: '0.0.0.0/0'
           Description: Internet HTTP
 
-  BackendTG:
+  FrontendTG:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
-      Name:
-      Port:
-      HealthCheckEnabled: Boolean
-      HealthCheckIntervalSeconds: Integer
-      HealthCheckPath: String
-      HealthCheckPort: String
-      HealthCheckProtocol: String
-      HealthCheckTimeoutSeconds: Integer
-      HealthyThresholdCount: Integer
+      Name: !Sub "${AWS::StackName} FrontendTG"
+      Port: !Ref FrontendPort
+      HealthCheckProtocol: !Ref FrontendHealthCheckProtocol
+      HealthCheckEnabled: !Ref FrontendHealthCheckEnabled
+      HealthCheckIntervalSeconds: !Ref FrontendHealthCheckIntervalSeconds
+      HealthCheckPath: !Ref FrontendHealthCheckPath
+      HealthCheckPort: !Ref FrontendHealthCheckPort
+      HealthCheckTimeoutSeconds: !Ref FrontendHealthCheckTimeoutSeconds
+      HealthyThresholdCount: !Ref FrontendHealthyThresholdCount
+      UnhealthyThresholdCount: !Ref FrontendUnhealthyThresholdCount
       IpAddressType: String
       Matcher: 
-        Matcher
-      Protocol: String
-      ProtocolVersion: String
+        HttpCode: 200
+      Protocol: HTTP
+      ProtocolVersion: HTTP2
       Tags: 
         - Tag
       TargetGroupAttributes: 
         - TargetGroupAttribute
       Targets: 
         - TargetDescription
-      TargetType: String
-      UnhealthyThresholdCount: Integer
       VpcId: String
-  FrontendTG:
+
+  BackendTG:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
-
+      Name: !Sub "${AWS::StackName} FrontendTG"
+      Port: !Ref BackendPort
+      HealthCheckProtocol: !Ref BackendHealthCheckProtocol
+      HealthCheckEnabled: !Ref BackendHealthCheckEnabled
+      HealthCheckIntervalSeconds: !Ref BackendHealthCheckIntervalSeconds
+      HealthCheckPath: !Ref BackendHealthCheckPath
+      HealthCheckPort: !Ref BackendHealthCheckPort
+      HealthCheckTimeoutSeconds: !Ref BackendHealthCheckTimeoutSeconds
+      HealthyThresholdCount: !Ref BackendHealthyThresholdCount
+      UnhealthyThresholdCount: !Ref BackendUnhealthyThresholdCount
+      IpAddressType: String
+      Matcher: 
+        HttpCode: 200
+      Protocol: HTTP
+      ProtocolVersion: HTTP2
+      Tags: 
+        - Tag
+      TargetGroupAttributes: 
+        - TargetGroupAttribute
+      Targets: 
+        - TargetDescription
+      VpcId: String
 # Outputs:
   
